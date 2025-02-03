@@ -2,11 +2,15 @@ let images = [];
 let cols = 6, rows = 6;
 let imgSize;
 let colLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
+let githubRepo = "https://raw.githubusercontent.com/your-username/your-repo/main/assets/"; // Update with your repo details
 
 function preload() {
-  // Load 36 images dynamically
+  // Load 36 images dynamically from GitHub
   for (let i = 1; i <= cols * rows; i++) {
-    images.push(loadImage(`assets/img${i}.jpg`));
+    let img = loadImage(`${githubRepo}img${i}.jpg`, 
+      img => images.push(img), 
+      err => images.push(null) // Handle missing images
+    );
   }
 }
 
@@ -26,8 +30,10 @@ function draw() {
     for (let x = 0; x < cols; x++) {
       if (index < images.length) {
         let img = images[index];
-        img.resize(imgSize, imgSize); // Ensure all images are the same size
-        image(img, x * imgSize, y * imgSize, imgSize, imgSize);
+        if (img) {
+          img.resize(imgSize, imgSize); // Ensure all images are the same size
+          image(img, x * imgSize, y * imgSize, imgSize, imgSize);
+        }
         
         // Draw position indicator
         let label = colLabels[x] + (y + 1);
