@@ -16,21 +16,19 @@ let githubRepo = "/CSP-Mondrian-2025/assets/"; // Update with your repo details
 function preload() {
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
-      let label = colLabels[col] + (row + 1); // Filename format (e.g., "A1")
+      let label = colLabels[col] + (row + 1);
       let imgPath = `${githubRepo}${label}.png`;
-      
-      images[label] = null; // Default value for missing images
-
+      images[label] = null; // Default to null in case the image fails
       loadImage(imgPath, 
-        img => images[label] = img, // Store image using its name as the key
-        err => images.push(null) // Handle missing images
+        img => images[label] = img,  // Store image using its filename as the key
+        err => console.warn(`Missing image: ${imgPath}`)
       );
     }
   }
 }
 
 function setup() {
-  createCanvas(600, 600); // Adjust canvas size as needed
+  createCanvas(600, 600);
   imgSize = width / cols;
   textSize(20);
   textAlign(CENTER, CENTER);
@@ -41,15 +39,13 @@ function draw() {
   background(255);
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
-      let index = row * cols + col;
-      let img = images[index];
+      let label = colLabels[col] + (row + 1);
+      let img = images[label];
       if (img) {
         img.resize(imgSize, imgSize);
         image(img, col * imgSize, row * imgSize, imgSize, imgSize);
-      } else {
-        let label = colLabels[col] + (row + 1);
-        text(label, col * imgSize + imgSize / 2, row * imgSize + imgSize / 2);
       }
     }
   }
 }
+
