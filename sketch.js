@@ -2,7 +2,7 @@ let images = [];
 let cols = 6, rows = 6;
 let imgSize;
 let colLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
-let githubRepo = "https://raw.githubusercontent.com/your-username/your-repo/main/assets/"; // Update with your repo details
+let githubRepo = "https://github.com/JackQuicker1/CSP-Mondrian-2025/tree/main/assets"; // Update with your repo details
 
 function preload() {
   // Load 36 images dynamically from GitHub
