@@ -4,13 +4,27 @@ let imgSize;
 let colLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
 let githubRepo = "/CSP-Mondrian-2025/assets/"; // Update with your repo details
 
+// function preload() {
+//   // Load 36 images dynamically from GitHub
+//   for (let i = 1; i <= cols * rows; i++) {
+//     let img = loadImage(`${githubRepo}${colLabels[(i - 1) % cols]}${Math.ceil(i / cols)}.png`, 
+//       img => images.push(img), 
+//       err => images.push(null) // Handle missing images
+//     );
+//   }
+// }
 function preload() {
-  // Load 36 images dynamically from GitHub
-  for (let i = 1; i <= cols * rows; i++) {
-    let img = loadImage(`${githubRepo}${colLabels[(i - 1) % cols]}${Math.ceil(i / cols)}.png`, 
-      img => images.push(img), 
-      err => images.push(null) // Handle missing images
-    );
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      let label = colLabels[col] + (row + 1);
+      let imgPath = `${githubRepo}${label}.png`;
+      let index = row * cols + col;
+      images[index] = null;
+      loadImage(imgPath, 
+        img => images[index] = img,
+        err => images.push(null) // Handle missing images
+      );
+    }
   }
 }
 
@@ -24,22 +38,17 @@ function setup() {
 
 function draw() {
   background(255);
-  
-  let index = 0;
-  for (let y = 0; y < rows; y++) {
-    for (let x = 0; x < cols; x++) {
-      if (index < images.length) {
-        let img = images[index];
-        if (img) {
-          img.resize(imgSize, imgSize); // Ensure all images are the same size
-          image(img, x * imgSize, y * imgSize, imgSize, imgSize);
-        }
-        
-        // Draw position indicator
-        let label = colLabels[x] + (y + 1);
-        text(label, x * imgSize + imgSize / 2, y * imgSize + imgSize / 2);
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      let index = row * cols + col;
+      let img = images[index];
+      if (img) {
+        img.resize(imgSize, imgSize);
+        image(img, col * imgSize, row * imgSize, imgSize, imgSize);
+      } else {
+        let label = colLabels[col] + (row + 1);
+        text(label, col * imgSize + imgSize / 2, row * imgSize + imgSize / 2);
       }
-      index++;
     }
   }
 }
