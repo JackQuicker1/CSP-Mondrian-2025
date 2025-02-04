@@ -7,7 +7,7 @@ let githubRepo = "/assets/"; // Update with your repo details
 function preload() {
   // Load 36 images dynamically from GitHub
   for (let i = 1; i <= cols * rows; i++) {
-    let img = loadImage(`${githubRepo}img${i}.jpg`, 
+    let img = loadImage(`${githubRepo}${colLabels[(i - 1) % cols]}${Math.ceil(i / cols)}.png`, 
       img => images.push(img), 
       err => images.push(null) // Handle missing images
     );
