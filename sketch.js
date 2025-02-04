@@ -44,6 +44,8 @@ function draw() {
       if (img) {
         img.resize(imgSize, imgSize);
         image(img, col * imgSize, row * imgSize, imgSize, imgSize);
+      } else {
+        text(label, col * imgSize + imgSize / 2, row * imgSize + imgSize / 2);
       }
     }
   }
