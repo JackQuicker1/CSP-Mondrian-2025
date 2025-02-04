@@ -16,12 +16,13 @@ let githubRepo = "/CSP-Mondrian-2025/assets/"; // Update with your repo details
 function preload() {
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
-      let label = colLabels[col] + (row + 1);
+      let label = colLabels[col] + (row + 1); // Filename format (e.g., "A1")
       let imgPath = `${githubRepo}${label}.png`;
-      let index = row * cols + col;
-      images[index] = null;
+      
+      images[label] = null; // Default value for missing images
+
       loadImage(imgPath, 
-        img => images[index] = img,
+        img => images[label] = img, // Store image using its name as the key
         err => images.push(null) // Handle missing images
       );
     }
