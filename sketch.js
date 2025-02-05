@@ -38,15 +38,22 @@ function setup() {
 
 function draw() {
   background(255);
+  let gridX = gap;
+  let gridY = (height - rows * imgSize) / 2; // Center vertically
+  let largeImgX = width - (cols * imgSize) - gap;
+  let largeImgY = (height - rows * imgSize) / 2; // Center vertically
+
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
       let label = colLabels[col] + (row + 1);
       let img = images[label];
+      let x = gridX + col * imgSize;
+      let y = gridY + row * imgSize;
       if (img) {
         img.resize(imgSize, imgSize);
-        image(img, col * imgSize, row * imgSize, imgSize, imgSize);
+        image(img, x, y, imgSize, imgSize);
       } else {
-        text(label, col * imgSize + imgSize / 2, row * imgSize + imgSize / 2);
+        text(label, x + imgSize / 2, y + imgSize / 2);
       }
     }
   }
