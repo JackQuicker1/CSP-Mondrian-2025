@@ -3,6 +3,7 @@ let cols = 6, rows = 6;
 let imgSize;
 let colLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
 let githubRepo = "/CSP-Mondrian-2025/assets/"; // Update with your repo details
+let largeImage = "/CSP-Mondrian-2025/assets/mondrian.jpg;
 
 // function preload() {
 //   // Load 36 images dynamically from GitHub
@@ -49,5 +50,9 @@ function draw() {
       }
     }
   }
+  if (largeImage) {
+    image(largeImage, width / 2, 0, width / 2, height);
+  }
 }
+
 
