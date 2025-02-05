@@ -27,6 +27,7 @@ function preload() {
       );
     }
   }
+  let largeImage1 = loadImage(largeImage1);
 }
 
 function setup() {
