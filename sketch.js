@@ -1,6 +1,7 @@
 let images = [];
 let cols = 6, rows = 6;
 let imgSize;
+let gap = 20
 let colLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
 let githubRepo = "/CSP-Mondrian-2025/assets/"; // Update with your repo details
 let largeImage1 = "/CSP-Mondrian-2025/assets/Mondrian.jpg";
@@ -58,7 +59,7 @@ function draw() {
     }
   }
   if (largeImage1) {
-    image(largeImage, width / 2, 0, width / 2, height);
+    image(largeImage1, width / 2, 0, width / 2, height);
   }
 }
 
